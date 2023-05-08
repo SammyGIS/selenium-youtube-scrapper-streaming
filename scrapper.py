@@ -3,6 +3,8 @@ from bs4 import BeautifulSoup
 
 YOUTUBE_TRENDING_URL = 'https://www.youtube.com/feed/trending'
 
+
+# Request does not execute javascript
 response = requests.get(YOUTUBE_TRENDING_URL)
 
 # print(response.status_code)

@@ -1,9 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import pandas as pd
-import smtplib
-from email.message import EmailMessage
 import json
+from sendmail import send_email
 
 # link to youtube trending page
 YOUTUBE_TRENDING_URL = 'https://www.youtube.com/feed/trending'
@@ -56,49 +55,6 @@ def parse_video(video):
         'channel_name': channel_name,
         'description': description
     }
-
-def send_email(body):
-    try:
-        server_ssl = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-        server_ssl.ehlo()
-
-        SENDER_EMAIL ='9ijarise@gmail.com'
-        RECEIVER_EMAIL ='9ijarise@gmail.com'
-        SENDER_PASSWORD = 'iqsglanjpdnqldew'
-
-        subject = 'get list of top trending videos on youtube'
-        # body = "Hi, a new update just dropped"
-
-
-        # msg = EmailMessage()
-        # msg.set_content({body})
-        # msg['Subject'] = {subject}
-        # msg['From'] = {SENDER_EMAIL}
-        # msg['To'] = {RECEIVER_EMAIL}
-
-        email_text = f""" 
-        Subject: {subject}
-
-
-
-        body: {body}
-        
-        """
-
-        server_ssl.login(SENDER_EMAIL, SENDER_PASSWORD)
-        # server_ssl.send_message(msg, SENDER_EMAIL, RECEIVER_EMAIL)
-        # server_ssl.quit()
-        server_ssl.sendmail(SENDER_EMAIL, RECEIVER_EMAIL, email_text)
-        server_ssl.close()
-        print ("Successfully sent email")
-
-    except Exception as e:
-        print(e)
-
-
-
-
-
 
 if __name__ == "__main__":
     print('Create driver')
